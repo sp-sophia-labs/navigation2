@@ -88,6 +88,12 @@ MapServer::on_configure(const rclcpp_lifecycle::State & /*state*/)
   std::string topic_name = get_parameter("topic_name").as_string();
   frame_id_ = get_parameter("frame_id").as_string();
 
+  // Namespace frame_id when needed
+  std::string node_namespace = get_namespace();
+  if (!node_namespace.empty()) {
+    frame_id_ = node_namespace + std::string("/") + frame_id_;
+  }
+
   // Shared pointer to LoadMap::Response is also should be initialized
   // in order to avoid null-pointer dereference
   std::shared_ptr<nav2_msgs::srv::LoadMap::Response> rsp =
