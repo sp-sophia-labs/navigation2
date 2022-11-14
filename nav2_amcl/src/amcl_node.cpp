@@ -1016,6 +1016,7 @@ AmclNode::calculateMaptoOdomTransform(
   latest_tf_valid_ = true;
 }
 
+// TODO(sophia) namespace this
 void
 AmclNode::sendMapToOdomTransform(const tf2::TimePoint & transform_expiration)
 {
@@ -1110,6 +1111,10 @@ AmclNode::initParameters()
   odom_frame_id_ = nav2_util::strip_leading_slash(odom_frame_id_);
   base_frame_id_ = nav2_util::strip_leading_slash(base_frame_id_);
   global_frame_id_ = nav2_util::strip_leading_slash(global_frame_id_);
+
+  std::cout << "############ DEBUG GLOBAL FRAME: " << global_frame_id_ << std::endl;
+  std::cout << "############ DEBUG ODOM FRAME: " << odom_frame_id_ << std::endl;
+  std::cout << "############ DEBUG BASE FRAME: " << base_frame_id_ << std::endl;
 
   last_time_printed_msg_ = now();
 
